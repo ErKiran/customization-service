@@ -30,6 +30,18 @@ const themeSchema = new Schema(
       type: String,
       required: true,
     },
+    pricing: {
+      price: {
+        type: Number,
+      },
+      isFree: {
+        type: Boolean,
+        default: true,
+      },
+      currency: {
+        type: String,
+      },
+    },
     isActive: {
       type: Boolean,
       default: true,
