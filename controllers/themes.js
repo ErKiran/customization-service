@@ -25,8 +25,10 @@ async function createTheme(req, res) {
   }
 }
 
-async function getAllFreeThemes(req, res) {
+async function getAllAdminThemes(req, res) {
   try {
+    const themes = await Themes.find({ author: "Admin" }).lean();
+    return res.json(themes);
   } catch (err) {
     throw new Error(`Can't get All free themes ${err}`);
   }
@@ -34,5 +36,5 @@ async function getAllFreeThemes(req, res) {
 
 module.exports = {
   createTheme,
-  getAllFreeThemes,
+  getAllAdminThemes,
 };
