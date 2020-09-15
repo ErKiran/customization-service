@@ -1,8 +1,7 @@
 const formidable = require("formidable");
 const fs = require("fs");
 const { validateFile } = require("./utils/validateFile");
-const {extractZip} = require('./utils/extractZip');
-
+const { unzip } = require("./utils/unzip");
 
 async function uploadFile(req, res) {
   try {
@@ -20,10 +19,12 @@ async function uploadFile(req, res) {
       }
       file.path = __dirname + "/themes/" + file.name;
       filePath = file.path;
-      const dest = __dirname + "/theme/"+ isValidFormat.fileName;
-      
-      form.on("file", () => {});
-      extractZip(filePath,dest)
+      const dest = __dirname + "/theme/" + isValidFormat.fileName;
+
+      form.on("file", () => {
+        unzip(filePath, dest);
+      });
+
       return res.json({
         path: filePath,
       });
